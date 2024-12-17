@@ -133,7 +133,7 @@
                 Icons =
                     HttpService:JSONDecode(
                     game:HttpGetAsync(
-                        "https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json"
+                        "https://create.roblox.com/store/asset/117562464942264/Toji-from-anime"
                     )
                 ).icons
             end
