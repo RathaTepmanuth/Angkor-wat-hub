@@ -1,6 +1,6 @@
-        --- Hub Values ---
+    --- Hub Values ---
         Hub = {}
-        Hub.Name = "Tsuo Hub"
+        Hub.Name = "Angkor wat"
         Hub.Game = "Blox Fruits"
         ---- Settings -----
         HttpService = game:GetService("HttpService")
@@ -133,11 +133,22 @@
                 Icons =
                     HttpService:JSONDecode(
                     game:HttpGetAsync(
-                        "https://create.roblox.com/store/asset/117562464942264/Toji-from-anime"
+                        "https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json"
                     )
                 ).icons
             end
-          )
+        )
+        local MMBStatus = "https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json"
+        if not Success then
+            game.Players.LocalPlayer:Kick("Can not get icons....")
+        end  
+        local CheckMobile = function()
+            if
+                game:GetService("UserInputService").TouchEnabled
+             then
+                return true 
+            end
+        end 
         IsMobile = CheckMobile()
         Size11,Size22 = 600,460
         if IsMobile then 
@@ -179,7 +190,7 @@
             ImageLabel.BorderSizePixel = 0
             ImageLabel.Position = UDim2.new(0.48888889, 0, 0.48888889, 0)
             ImageLabel.Size = UDim2.new(0, 45, 0, 45)
-            ImageLabel.Image = "rbxassetid://117562464942264"
+            ImageLabel.Image = "rbxassetid://15241946029"
             
             TextButton.Parent = MainFrame
             TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -201,8 +212,8 @@
         local Window =
             Fluent:CreateWindow(
             {
-                Title = "Tsuo Hub Update 24",
-                SubTitle = "Dev By RathaTepmanuth",
+                Title = "Tsuo Hub Update 20",
+                SubTitle = "Dev By VMH09",
                 TabWidth = 160,
                 Size = UDim2.fromOffset(Size11, Size22),
                 Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
