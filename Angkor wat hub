@@ -137,18 +137,7 @@
                     )
                 ).icons
             end
-        )
-        local MMBStatus = "https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json"
-        if not Success then
-            game.Players.LocalPlayer:Kick("Can not get icons....")
-        end  
-        local CheckMobile = function()
-            if
-                game:GetService("UserInputService").TouchEnabled
-             then
-                return true 
-            end
-        end 
+        ) 
         IsMobile = CheckMobile()
         Size11,Size22 = 600,460
         if IsMobile then 
