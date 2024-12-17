@@ -190,7 +190,7 @@
             ImageLabel.BorderSizePixel = 0
             ImageLabel.Position = UDim2.new(0.48888889, 0, 0.48888889, 0)
             ImageLabel.Size = UDim2.new(0, 45, 0, 45)
-            ImageLabel.Image = "rbxassetid://15241946029"
+            ImageLabel.Image = "rbxassetid://117562464942264"
             
             TextButton.Parent = MainFrame
             TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -212,8 +212,8 @@
         local Window =
             Fluent:CreateWindow(
             {
-                Title = "Tsuo Hub Update 20",
-                SubTitle = "Dev By VMH09",
+                Title = "Tsuo Hub Update 24",
+                SubTitle = "Dev By RathaTepmanuth",
                 TabWidth = 160,
                 Size = UDim2.fromOffset(Size11, Size22),
                 Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
