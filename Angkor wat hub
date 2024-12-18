@@ -133,7 +133,7 @@
                 Icons =
                     HttpService:JSONDecode(
                     game:HttpGetAsync(
-                        "https://raw.githubusercontent.com/evoincorp/lucideblox/master/src/modules/util/icons.json"
+                        "https://create.roblox.com/store/asset/117562464942264/Toji-from-anime"
                     )
                 ).icons
             end
@@ -151,7 +151,7 @@
             if game.CoreGui:FindFirstChild("ClickButton") then 
                 game.CoreGui:FindFirstChild("ClickButton"):Destroy()
             end
-            ClickButton.Name = "ClickButton"
+            ClickButton.Name = "Angkor wat"
             ClickButton.Parent = game.CoreGui
             ClickButton.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
             
@@ -173,13 +173,13 @@
             UICorner_2.Parent = ImageLabel
             
             ImageLabel.Parent = MainFrame
-            ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
+            ImageLabel.AnchorPoint = Vector2.new(
             ImageLabel.BackgroundColor3 = Color3.new(0, 0, 0)
             ImageLabel.BorderColor3 = Color3.new(0, 0, 0)
             ImageLabel.BorderSizePixel = 0
             ImageLabel.Position = UDim2.new(0.48888889, 0, 0.48888889, 0)
             ImageLabel.Size = UDim2.new(0, 45, 0, 45)
-            ImageLabel.Image = "rbxassetid://15241946029"
+            ImageLabel.Image = "rbxassetid://117562464942264"
             
             TextButton.Parent = MainFrame
             TextButton.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -201,8 +201,8 @@
         local Window =
             Fluent:CreateWindow(
             {
-                Title = "Tsuo Hub Update 20",
-                SubTitle = "Dev By VMH09",
+                Title = "Tsuo Hub Update 24",
+                SubTitle = "Dev By Manuth",
                 TabWidth = 160,
                 Size = UDim2.fromOffset(Size11, Size22),
                 Acrylic = false, -- The blur may be detectable, setting this to false disables blur entirely
@@ -216,7 +216,7 @@
             domain = newmm
             function newmm:NewParagraph(cf)
                 local paragraphnew
-                newTitle = cf.Title or "Tsuo Hub"
+                newTitle = cf.Title or "Angkor wat Hub"
                 newContent = cf.Content or "MMB"
                 paragraphnew =
                     domain:AddParagraph(
