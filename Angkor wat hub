@@ -805,39 +805,19 @@ Tab4:AddToggle({
 	Name = "auto melee",
 	Default = false,
 	Callback = function(Value)
-		function AddStats(stat, currentLevel, targetLevel)
-    local success, errorMsg = pcall(function()
-        if currentLevel and targetLevel then
-            currentLevel = targetLevel - currentLevel
-        end
-        if not currentLevel then
-            currentLevel = 1
-        end
-        local args = {
-            [1] = "AddPoint",
-            [2] = stat,
-            [3] = currentLevel
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end)
-    if not success then
-        print("Error adding stat:", errorMsg)
-    end
-end
-
-task.spawn(function()
-    while task.wait(6) do -- Slower Clicking Speed (6 seconds between clicks)
-        -- Auto Stat for Melee
-        local meleeLevel
-        pcall(function()
-            meleeLevel = game:GetService("Players").LocalPlayer.Data.Stats.Melee.Level.Value
-        end)
-        
-        if meleeLevel < 2450 then
-            AddStats("Melee", meleeLevel, 2450)
+	spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Melee then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Melee",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
         end
     end
-end)
+end)	
 	end    
 })
 
@@ -845,46 +825,26 @@ Tab4:AddToggle({
 	Name = "auto defense",
 	Default = false,
 	Callback = function(Value)
-	function AddStats(stat, currentLevel, targetLevel)
-    local success, errorMsg = pcall(function()
-        if currentLevel and targetLevel then
-            currentLevel = targetLevel - currentLevel
-        end
-        if not currentLevel then
-            currentLevel = 1
-        end
-        local args = {
-            [1] = "AddPoint",
-            [2] = stat,
-            [3] = currentLevel
-        }
-        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-    end)
-    if not success then
-        print("Error adding stat:", errorMsg)
-    end
-end
-
-task.spawn(function()
-    while task.wait(5) do -- Slower Clicking Speed (5 seconds between clicks)
-        -- Auto Stat for Defense
-        local defenseLevel
-        pcall(function()
-            defenseLevel = game:GetService("Players").LocalPlayer.Data.Stats["Defense"].Level.Value
-        end)
-        
-        if defenseLevel < 1800 then
-            AddStats("Defense", defenseLevel, 1800)
+spawn(function()
+    while wait() do
+        if _G.Auto_Stats_Defense then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Defense",
+                [3] = 3
+            }
+                        
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
         end
     end
-end)	
+end)
 	end    
 })
 Tab4:AddToggle({
 	Name = "auto demon ",
 	Default = false,
 	Callback = function(Value)
-		spawn(function()
+	spawn(function()
     while wait() do
         if _G.Auto_Stats_Devil_Fruit then
             local args = {
@@ -896,7 +856,7 @@ Tab4:AddToggle({
             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
         end
     end
-end)
+end)	
 	end    
 })
 
