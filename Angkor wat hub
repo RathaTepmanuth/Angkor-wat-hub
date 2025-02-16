@@ -837,7 +837,7 @@ Tab:AddToggle({
 	Default = false,
 	Callback = function(Value)
 _G.AutoMaterial = Value
-        if Value == false then
+        if Value == true then
             wait()
             Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
             wait()
