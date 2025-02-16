@@ -705,29 +705,29 @@ function bringMobs(CF)
 end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "AngkorWat || BloxFruits", HidePremium = false, IntroEnabled = true, IntroText = "ធ្វើដោយ : ម៉ានុត", SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "AngkorWat HUB || BloxFruits", HidePremium = false, IntroEnabled = true, IntroText = "Made By : TojiButSans", SaveConfig = true, ConfigFolder = "OrionTest"})
 local Tab = Window:MakeTab({
-	Name = "កន្លែងហ្វាម",
+	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 local Tab2 = Window:MakeTab({
-	Name = "បើកអូតូ",
+	Name = "Stat",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 local Tab3 = Window:MakeTab({
-	Name = "ធ្វើខ្វេះ/អាវ៉ាន់",
+	Name = "Quests/Items",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 local Tab4 = Window:MakeTab({
-	Name = "ស្រូត/Raid",
+	Name = "Fruits/Raid",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
 local Tab5 = Window:MakeTab({
-	Name = "បើកអូតូ",
+	Name = "Misc",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -735,20 +735,20 @@ Tab:AddLabel("Farm Level")
 Tab:AddDropdown({
 	Name = "Select Farm Tool",
 	Default = "Melee",
-	Options = {"កំដាប់ដៃ", "ដាវ"},
+	Options = {"Melee", "Sword"},
 	Callback = function(Value)
 		_G.toolFarm = Value
 	end    
 })
 Tab:AddToggle({
-	Name = "អូតូ-ហ្វាម Level",
+	Name = "Auto-Farm Level",
 	Default = false,
 	Callback = function(Value)
 		_G.autoFarm = Value
 	end    
 })
 Tab:AddToggle({
-	Name = "អូតូ-ហ្វាម មនុស្សនៅជិត",
+	Name = "Auto-Farm Nearest",
 	Default = false,
 	Callback = function(Value)
 		_G.autoFarmNearest = Value
@@ -781,27 +781,30 @@ Tab:AddToggle({
 -- Misc Tab Stuff
 Tab4:AddLabel("Farm Stuff")
 Tab4:AddToggle({
-	Name = "វ៉ៃអូតូលឿន",
+	Name = "Fast Attack",
 	Default = false,
 	Callback = function(Value)
 		_G.fastAttack = Value
 	end    
 })
 Tab4:AddToggle({
-	Name = "អូតូ Haki",
+	Name = "auto Haki",
 	Default = false,
 	Callback = function(Value)
 		_G.autoHaki = Value
 	end    
 })
 Tab4:AddToggle({
-	Name = "ចាប់មនុស្សទាំងអស់",
+	Name = "bring Mobs",
 	Default = false,
 	Callback = function(Value)
 		_G.bringNPCS = Value
 	end    
 })
-Tab4:AddToggle({
+
+---stat---
+
+Tab2:AddToggle({
 	Name = "auto melee",
 	Default = false,
 	Callback = function(Value)
@@ -810,7 +813,7 @@ melee = true
 	end    
 })
 
-Tab4:AddToggle({
+Tab2:AddToggle({
 	Name = "auto defense",
 	Default = false,
 	Callback = function(Value)
@@ -818,7 +821,23 @@ Tab4:AddToggle({
 defense = true
 	end    
 })
-Tab4:AddToggle({
+Tab2:AddToggle({
+	Name = "auto defense",
+	Default = false,
+	Callback = function(Value)
+	_G.PointStats = 1  -- Number of points to add
+gun = true
+	end    
+})
+Tab2:AddToggle({
+	Name = "auto sword ",
+	Default = false,
+	Callback = function(Value)
+		_G.PointStats = 1  -- Number of points to add
+sword = true
+	end    
+})
+Tab2:AddToggle({
 	Name = "auto demon ",
 	Default = false,
 	Callback = function(Value)
@@ -826,6 +845,53 @@ Tab4:AddToggle({
 demonfruit = true
 	end    
 })
+
+spawn(function()
+    while wait(0.5) do  -- Adjusted wait to reduce lag
+        if melee then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Melee",
+                [3] = _G.PointStats
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end 
+        if defense then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Defense",
+                [3] = _G.PointStats
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end 
+        if sword then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Sword",
+                [3] = _G.PointStats
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end 
+        if gun then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Gun",
+                [3] = _G.PointStats
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end 
+        if demonfruit then
+            local args = {
+                [1] = "AddPoint",
+                [2] = "Demon Fruit",
+                [3] = _G.PointStats
+            }
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+        end
+    end
+end)
+
+---misc---
 
 spawn(function()
 	while task.wait() do
@@ -876,47 +942,172 @@ spawn(function()
     end)
 end)
 
+---raid---
+
+Tab4:AddLabel("Auto buy chip")
+Tab4:AddDropdown({
+	Name = "Select fruit",
+	Default = "false",
+	Options = {"Flame","Ice","Quake","Light","Dark","Spider","Rumble","Magma","Buddha","Sand","Phoenix","Dough"},
+	Callback = function(Value)
+		SelectChip = Value
+	end    
+})
+
+-- Toggle for Auto Start Raid
+Tab4:AddToggle({
+    Name = "Auto buy Microchip",
+    Default = false,
+    Callback = function(Value)
+   _G.BuyChipRaid = Value
+    end
+})
+
 spawn(function()
-    while wait(0.5) do  -- Adjusted wait to reduce lag
-        if melee then
-            local args = {
-                [1] = "AddPoint",
-                [2] = "Melee",
-                [3] = _G.PointStats
-            }
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-        end 
-        if defense then
-            local args = {
-                [1] = "AddPoint",
-                [2] = "Defense",
-                [3] = _G.PointStats
-            }
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-        end 
-        if sword then
-            local args = {
-                [1] = "AddPoint",
-                [2] = "Sword",
-                [3] = _G.PointStats
-            }
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-        end 
-        if gun then
-            local args = {
-                [1] = "AddPoint",
-                [2] = "Gun",
-                [3] = _G.PointStats
-            }
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-        end 
-        if demonfruit then
-            local args = {
-                [1] = "AddPoint",
-                [2] = "Demon Fruit",
-                [3] = _G.PointStats
-            }
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    while wait() do
+		if _G.BuyChipRaid then
+			pcall(function()
+				local args = {
+					[1] = "RaidsNpc",
+					[2] = "Select",
+					[3] = SelectChip
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			end)
         end
     end
 end)
+
+-- Toggle for Auto Start Raid
+Tab4:AddToggle({
+    Name = "Auto start raid",
+    Default = false,
+    Callback = function(Value)
+   AutoSTartRaids = Value
+    end
+})
+
+spawn(function()
+    while task.wait() do
+        if AutoSTartRaids then
+            if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Microchip") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") then
+                if Second_Sea then
+                    fireclickdetector(game.Workspace.Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                elseif Third_Sea then
+                    local plr = game:GetService("Players").LocalPlayer
+                    local RaidLab = CFrame.new(-5057.146484375, 314.54132080078, -2934.7995605469)
+                    if (RaidLab.Position - plr.Character.HumanoidRootPart.Position).Magnitude > 10 then
+                        Tween(RaidLab)
+                    elseif (RaidLab.Position - plr.Character.HumanoidRootPart.Position).Magnitude < 10 then
+                        wait(1)
+                        fireclickdetector(game.Workspace.Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+                    end
+                end
+            end
+        end
+    end
+end)
+
+-- Toggle for Auto Aura Kill
+Tab4:AddToggle({
+    Name = "Auto next island",
+    Default = false,
+    Callback = function(Value)
+        _G.Auto_Dungeon = true 
+end
+})
+
+-- Tween Function for Smooth Movement
+function topos(cf)
+    local plr = game.Players.LocalPlayer
+    if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+        local tweenService = game:GetService("TweenService")
+        local tweenInfo = TweenInfo.new((plr.Character.HumanoidRootPart.Position - cf.Position).Magnitude/100, Enum.EasingStyle.Linear)
+        local tween = tweenService:Create(plr.Character.HumanoidRootPart, tweenInfo, {CFrame = cf})
+        tween:Play()
+        tween.Completed:Wait()
+    end
+end
+
+-- Check Closest Island for Raid
+function IsIslandRaid(cu)
+    local closestIsland = nil
+    local min = 4500
+    
+    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island " .. cu) then
+        for _, v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+            if v.Name == "Island " .. cu then
+                local plr = game.Players.LocalPlayer
+                if plr.Character and plr.Character:FindFirstChild("HumanoidRootPart") then
+                    local dist = (v.Position - plr.Character.HumanoidRootPart.Position).Magnitude
+                    if dist < min then
+                        min = dist
+                        closestIsland = v
+                    end
+                end
+            end
+        end
+    end
+    return closestIsland
+end
+
+-- Get the Next Island to Raid
+function getNextIsland()
+    TableIslandsRaid = {5, 4, 3, 2, 1}
+    for _, v in pairs(TableIslandsRaid) do
+        local island = IsIslandRaid(v)
+        if island and (island.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4500 then
+            return island
+        end
+    end
+end
+
+-- Main Loop for Auto Dungeon
+spawn(function()
+    while wait() do
+        if _G.Auto_Dungeon then
+            local nextIsland = getNextIsland()
+            if nextIsland then
+                spawn(function()
+                    topos(nextIsland.CFrame * CFrame.new(0, 60, 0))
+                end)
+            end
+        end
+    end
+end)
+
+-- Toggle for Auto Aura Kill
+Tab4:AddToggle({
+    Name = "Auto Aura Kill",
+    Default = false,
+    Callback = function(Value)
+        KillAura = Value
+    end
+})
+
+spawn(function()
+    while wait() do
+        if KillAura then
+            pcall(function()
+                for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                        repeat task.wait()
+                            sethiddenproperty(game:GetService('Players').LocalPlayer,"SimulationRadius",math.huge)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+                        until not KillAura or not v.Parent or v.Humanoid.Health <= 0
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+-- Toggle for Auto Awaken
+Tab4:AddToggle({
+    Name = "teleport to lab",
+    Default = True,
+    Callback = function(Value)
+     topos(CFrame.new(-6502.72559, 249.557404, -4477.06348))
+    end
+})
