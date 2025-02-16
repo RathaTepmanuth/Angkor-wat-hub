@@ -758,9 +758,9 @@ Tab:AddLabel("Farm Materials")
 Tab:AddDropdown({
 	Name = "Select Farm Material",
 	Default = "None",
-	Options = {"None", "None2"},
+	Options = {"Mystic Droplet", "Vampire Fang"},
 	Callback = function(Value)
-		_G.toolFarm = Value
+		_G.SelectFarm = item
 	end    
 })
 Tab:AddToggle({
@@ -1182,7 +1182,7 @@ end)
 
 -- Toggle for Auto Start Raid
 Tab3:AddToggle({
-    Name = "Auto unlock chest rengoku",
+    Name = "Auto unlock rengoku",
     Default = false,
     Callback = function(Value)
    _G.Kiem_Lua = Value
