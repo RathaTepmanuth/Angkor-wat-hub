@@ -665,6 +665,25 @@ function TP1(P)
 		 {CFrame = P}
 	 ):Play()
  end
+function TP2(CFrameTP)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrameTP
+end
+function bringMobs(FarmPos, MobName)
+    for _, v in ipairs(workspace.Enemies:GetChildren()) do
+        if v.Name == MobName then
+            if (v.HumanoidRootPart.Position - FarmPos.Position).magnitude <= _G.bringDistance then
+                v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+                v.HumanoidRootPart.CFrame = FarmPos
+                v.Humanoid:ChangeState(14)
+                v.Humanoid.WalkSpeed = 0
+                v.Humanoid.JumpPower = 0
+                v.HumanoidRootPart.CanCollide = false
+                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+            end
+        end
+    end
+end
+
  
  function FindEnemiesInRange(GetTab, Mods, Distance)
     local HeadMods = nil
@@ -1243,7 +1262,6 @@ Tab3:AddToggle({
     Default = false,
     Callback = function(Value)
    _G.Auto_Regoku = Value
-    StopTween(_G.Auto_Nha_Dien)
     end
 })
 
@@ -1280,43 +1298,3 @@ spawn(function()
         end
     end);
 end);
-
--- Toggle for Auto Start Raid
-Tab3:AddToggle({
-    Name = "Auto unlock rengoku",
-    Default = false,
-    Callback = function(Value)
-   _G.Kiem_Lua = Value
-    StopTween(_G.Kiem_Lua)
-    end
-})
-
-spawn(function()
-        pcall(function()
-            while wait() do
-                if _G.Kiem_Lua and AnDepZai2 then
-                    if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key") then
-                        EquipWeapon("Hidden Key")
-                        topos(CFrame.new(6571.1201171875, 299.23028564453, -6967.841796875))
-                    elseif game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior") then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v.Name == "Snow Lurker" or v.Name == "Arctic Warrior") and v.Humanoid.Health > 0 then
-                                repeat task.wait()
-                                    EquipWeapon(_G.SelectWeapon)
-                                    AutoHaki()                                    
-                                    v.HumanoidRootPart.CanCollide = false
-                                    RengokuMon = v.HumanoidRootPart.CFrame
-                                    topos(v.HumanoidRootPart.CFrame * Pos)      
-                                    RenGuKu = true
-                                until _G.Kiem_Lua == false or not v.Parent or v.Humanoid.Health <= 0
-                                StartRengokuMagnet = false
-                            end
-                        end
-                    else
-                        RenGuKu = false
-                        topos(CFrame.new(5439.716796875, 84.420944213867, -6715.1635742188))
-                    end
-                end
-            end
-        end)
-    end)
