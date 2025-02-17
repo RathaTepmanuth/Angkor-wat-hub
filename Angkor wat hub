@@ -630,9 +630,9 @@ function CheckQuest()
                 NameMon = "Isle Champion"
                 CFrameQuest = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
                 CFrameMon = CFrame.new(-16347.4150390625, 92.09503936767578, 1122.335205078125)
-            end
         end
     end
+end
 function TP1(P)
 	 Distance = (P.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
 	 if Distance < 10 then
@@ -685,40 +685,6 @@ function GetEquippedTool()
     end
     return nil
 end
-     spawn(function()
-	while task.wait() do
-		pcall(function()
-            CheckQuest()
-			for i, v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-				if _G.BringMonster then
-					if StartBring and v.Name == MonFarm or v.Name == Mon and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 and (v.HumanoidRootPart.Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= _G.BringMode then
-						if v.Name == "Factory Staff" then
-							if (v.HumanoidRootPart.Position - PosMon.Position).Magnitude <= 5000 then
-								v.Head.CanCollide = false
-								v.HumanoidRootPart.CanCollide = false
-								v.HumanoidRootPart.CFrame = PosMon
-								if v.Humanoid:FindFirstChild("Animator") then
-									v.Humanoid.Animator:Destroy()
-								end
-								sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
-							end
-						elseif v.Name == MonFarm or v.Name == Mon then
-							if (v.HumanoidRootPart.Position - PosMon.Position).Magnitude <= 4500 then
-                                v.HumanoidRootPart.CFrame = PosMon
-                                v.HumanoidRootPart.CanCollide = false
-                                v.Head.CanCollide = false
-                                if v.Humanoid:FindFirstChild("Animator") then
-                                    v.Humanoid.Animator:Destroy()
-                                end
-                                sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-							end
-						end
-					end
-				end
-			end
-		end)
-	end
-end)
 function AttackNoCoolDown()
     local Tablet = {}
     local FindEnemies = FindEnemiesInRange(Tablet, game:GetService("Workspace").Enemies:GetChildren(), 60, "Head", true)
@@ -737,10 +703,10 @@ function AttackNoCoolDown()
    end
 end
 function AutoHaki()
-        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
-            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
-        end
+    if game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") == nil then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
     end
+end
 function EquipTool(Name)
     for _, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
         if v.ToolTip == Name then
@@ -784,6 +750,49 @@ spawn(function()
 		end)
 	end
 end)
+
+spawn(function()
+        while task.wait() do
+        if _G.AutoMaterial then
+        pcall(function()
+          MaterialMon(SelectMaterial)
+            toTarget(MPos)
+          if game:GetService("Workspace").Enemies:FindFirstChild(MMon) then
+          for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
+          if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+          if v.Name == MMon then
+            repeat wait(_G.Fast_Delay)
+                AttackNoCoolDown()
+          AutoHaki()
+          bringmob = true
+          EquipTool(SelectWeapon)
+          Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
+          v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
+          v.HumanoidRootPart.Transparency = 1
+          v.Humanoid.JumpPower = 0
+          v.Humanoid.WalkSpeed = 0
+          v.HumanoidRootPart.CanCollide = false
+          FarmPos = v.HumanoidRootPart.CFrame
+          MonFarm = v.Name
+          --Click
+          until not _G.AutoMaterial or not v.Parent or v.Humanoid.Health <= 0
+          bringmob = false
+        end
+          end
+          end
+          else
+            for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
+          if string.find(v.Name, Mon) then
+          if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
+          Tween(v.CFrame * CFrame.new(posX,posY,posZ))
+          end
+          end
+          end
+          end
+          end)
+        end
+        end
+      end)
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "AngkorWat HUB || BloxFruits", HidePremium = false, IntroEnabled = true, IntroText = "Made By : TojiButSans", SaveConfig = true, ConfigFolder = "OrionTest"})
@@ -856,7 +865,7 @@ Tab:AddToggle({
 	Default = false,
 	Callback = function(Value)
 _G.AutoMaterial = Value
-        if Value == false then
+        if Value == true then
             wait()
             Tween(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
             wait()
