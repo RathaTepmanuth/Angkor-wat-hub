@@ -850,6 +850,14 @@ Tab3:AddToggle({
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 	end    
 })
+Tab3:AddLabel("fruit")
+Tab3:AddToggle({
+	Name = "auto random",
+	Default = false,
+	Callback = function(Value)
+		_G.Random_Auto = Value
+	end    
+})
 -- Misc Tab Stuff
 Tab5:AddLabel("Farm Stuff")
 Tab5:AddToggle({
@@ -1222,4 +1230,14 @@ spawn(function()
                 end)
             end
         end
+    end)
+
+spawn(function()
+        pcall(function()
+            while wait(.1) do
+                if _G.Random_Auto then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
+                end 
+            end
+        end)
     end)
