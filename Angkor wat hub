@@ -795,7 +795,7 @@ spawn(function()
       end)
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "AngkorWat HUB || BloxFruits", HidePremium = false, IntroEnabled = true, IntroText = "Made By : TojiButSans", SaveConfig = true, ConfigFolder = "OrionTest"})
+local Window = OrionLib:MakeWindow({Name = "AngkorWat HUB || BloxFruits", HidePremium = false, IntroEnabled = true, IntroText = "Made By : ម៉ានុត", SaveConfig = true, ConfigFolder = "OrionTest"})
 local Tab = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://4483345998",
@@ -895,6 +895,19 @@ Tab5:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.BringMonster = Value
+	end    
+})
+
+Tab3:AddToggle({
+	Name = "auto buy chip law",
+	Default = false,
+	Callback = function(Value)
+		local args = {
+       [1] = "BlackbeardReward",
+       [2] = "Microchip",
+       [3] = "2"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 	end    
 })
 
