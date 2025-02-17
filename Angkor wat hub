@@ -850,7 +850,6 @@ Tab3:AddToggle({
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 	end    
 })
-Tab4:AddLabel("Fruit")
 -- Toggle for Auto Awaken
 Tab4:AddToggle({
     Name = "auto random fruit",
