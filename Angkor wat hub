@@ -602,48 +602,6 @@ function CheckQuest()
             NameMon = "Snow Demon"
             CFrameQuest = CFrame.new(-1150.0400390625, 20.378934860229492, -14446.3349609375)
             CFrameMon = CFrame.new(-880.2006225585938, 71.24776458740234, -14538.609375)
-        elseif ((v197 == 2450) or (v197 <= 2474) or (SelectMonster == "Isle Outlaw")) then
-            Ms = "Isle Outlaw";
-            NameQuest = "TikiQuest1";
-            QuestLv = 1;
-            NameMon = "Isle Outlaw";
-            CFrameQ = CFrame.new(- 16549.890625, 55.68635559082031, - 179.91360473632812);
-            CFrameMon = CFrame.new(- 16162.8193359375, 11.6863374710083, - 96.45481872558594);
-        elseif ((v197 == 2475) or (v197 <= 2499) or (SelectMonster == "Island Boy")) then
-            Ms = "Island Boy";
-            NameQuest = "TikiQuest1";
-            QuestLv = 2;
-            NameMon = "Island Boy";
-            CFrameQ = CFrame.new(- 16549.890625, 55.68635559082031, - 179.91360473632812);
-            CFrameMon = CFrame.new(- 16357.3125, 20.632822036743164, 1005.64892578125);
-        elseif ((v197 == 2500) or (v197 <= 2524) or (SelectMonster == "Sun-kissed Warrior")) then
-            Ms = "Sun-kissed Warrior";
-            NameQuest = "TikiQuest2";
-            QuestLv = 1;
-            NameMon = "Sun-kissed Warrior";
-            CFrameQ = CFrame.new(- 16541.021484375, 54.77081298828125, 1051.461181640625);
-            CFrameMon = CFrame.new(- 16357.3125, 20.632822036743164, 1005.64892578125);
-        elseif ((v197 == 2525) or (v197 <= 2549) or (SelectMonster == "Isle Champion")) then
-            Ms = "Isle Champion";
-            NameQuest = "TikiQuest2";
-            QuestLv = 2;
-            NameMon = "Isle Champion";
-            CFrameQ = CFrame.new(- 16541.021484375, 54.77081298828125, 1051.461181640625);
-            CFrameMon = CFrame.new(- 16848.94140625, 21.68633460998535, 1041.4490966796875);
-        elseif ((v197 == 2550) or (v197 <= 2574) or (SelectMonster == "Serpent Hunter")) then
-            Ms = "Serpent Hunter";
-            NameQuest = "TikiQuest3";
-            QuestLv = 1;
-            NameMon = "Serpent Hunter";
-            CFrameQ = CFrame.new(- 16665.19140625, 104.59640502929688, 1579.6943359375);
-            CFrameMon = CFrame.new(- 16621.4140625, 121.40631103515625, 1290.6881103515625);
-        elseif ((v197 == 2575) or (v197 <= 2599) or (SelectMonster == "Skull Slayer") or (v197 == 2600)) then
-            Ms = "Skull Slayer";
-            NameQuest = "TikiQuest3";
-            QuestLv = 2;
-            NameMon = "Skull Slayer";
-            CFrameQ = CFrame.new(- 16665.19140625, 104.59640502929688, 1579.6943359375);
-            CFrameMon = CFrame.new(- 16811.5703125, 84.625244140625, 1542.235107421875);
         end
     end
 end
