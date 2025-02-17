@@ -930,6 +930,17 @@ Tab5:AddToggle({
 		_G.BringMonster = Value
 	end    
 })
+Tab5:AddSlider({
+	Name = "Bring Mob Distance",
+	Min = 200,
+	Max = 500,
+	Default = 250,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Value",
+	Callback = function(Value)
+		_G.bringDistance = Value
+	end    
 
 Tab3:AddToggle({
 	Name = "auto buy chip law",
@@ -1261,7 +1272,7 @@ Tab3:AddToggle({
     Name = "Auto get rengoku",
     Default = false,
     Callback = function(Value)
-   _G.Auto_Regoku = Value
+   _G.Auto_Regoku = v272;
     end
 })
 
