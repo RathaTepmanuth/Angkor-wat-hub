@@ -941,7 +941,7 @@ Tab5:AddSlider({
 	Callback = function(Value)
 		_G.bringDistance = Value
 	end    
-
+})
 Tab3:AddToggle({
 	Name = "auto buy chip law",
 	Default = false,
