@@ -851,21 +851,22 @@ Tab3:AddToggle({
 	end    
 })
 Tab4:AddLabel("Fruit")
+-- Toggle for Auto Awaken
 Tab4:AddToggle({
     Name = "auto random fruit",
     Default = True,
     Callback = function(Value)
     _G.Random_Auto = Value
-    end
+	end    
 })
+-- Toggle for Auto Awaken
 Tab4:AddToggle({
     Name = "auto store",
     Default = True,
     Callback = function(Value)
     getgenv().AutoStoreFruits = Value
-    end
-})
-
+	end    
+})    
 -- Misc Tab Stuff
 Tab5:AddLabel("Farm Stuff")
 Tab5:AddToggle({
