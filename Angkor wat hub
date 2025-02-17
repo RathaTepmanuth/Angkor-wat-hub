@@ -850,6 +850,14 @@ Tab3:AddToggle({
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 	end    
 })
+-- Toggle for Auto Awaken
+Tab4:AddToggle({
+    Name = "aura kill law",
+    Default = True,
+    Callback = function(Value)
+    _G.Auto_Rengoku = value
+    end
+})
 
 -- Misc Tab Stuff
 Tab5:AddLabel("Farm Stuff")
@@ -1224,3 +1232,42 @@ spawn(function()
             end
         end
     end)
+
+spawn(function()
+    pcall(function()
+        while task.wait() do
+            if _G.Auto_Rengoku then
+                local player = game:GetService("Players").LocalPlayer
+                local backpack = player.Backpack
+                local character = player.Character
+                local workspaceEnemies = game:GetService("Workspace").Enemies
+
+                if backpack:FindFirstChild("Hidden Key") or character:FindFirstChild("Hidden Key") then
+                    EquipTool("Hidden Key")
+                    Tween(CFrame.new(6571.1201171875, 299.23028564453, -6967.841796875))
+                elseif workspaceEnemies:FindFirstChild("Snow Lurker") or workspaceEnemies:FindFirstChild("Arctic Warrior") then
+                    for _, enemy in pairs(workspaceEnemies:GetChildren()) do
+                        if ((enemy.Name == "Snow Lurker" or enemy.Name == "Arctic Warrior") and enemy.Humanoid.Health > 0) then
+                            repeat
+                                task.wait(_G.Fast_Delay)
+                                EquipTool(SelectWeapon)
+                                AutoHaki()
+                                enemy.HumanoidRootPart.CanCollide = false
+                                enemy.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+                                FarmPos = enemy.HumanoidRootPart.CFrame
+                                MonFarm = enemy.Name
+                                Tween(enemy.HumanoidRootPart.CFrame * Pos)
+                                AttackNoCoolDown()
+                                bringmob = true
+                            until backpack:FindFirstChild("Hidden Key") or (_G.Auto_Rengoku == false) or not enemy.Parent or (enemy.Humanoid.Health <= 0)
+                            bringmob = false
+                        end
+                    end
+                else
+                    bringmob = false
+                    Tween(CFrame.new(5439.716796875, 84.420944213867, -6715.1635742188))
+                end
+            end
+        end
+    end)
+end)
