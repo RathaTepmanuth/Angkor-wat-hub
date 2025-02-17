@@ -784,49 +784,6 @@ spawn(function()
 	end
 end)
 
-spawn(function()
-        while task.wait() do
-        if _G.AutoMaterial then
-        pcall(function()
-          MaterialMon(SelectMaterial)
-            toTarget(MPos)
-          if game:GetService("Workspace").Enemies:FindFirstChild(MMon) then
-          for i,v in pairs (game.Workspace.Enemies:GetChildren()) do
-          if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-          if v.Name == MMon then
-            repeat wait(_G.Fast_Delay)
-                AttackNoCoolDown()
-          AutoHaki()
-          bringmob = true
-          EquipTool(SelectWeapon)
-          Tween(v.HumanoidRootPart.CFrame * CFrame.new(posX,posY,posZ))
-          v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-          v.HumanoidRootPart.Transparency = 1
-          v.Humanoid.JumpPower = 0
-          v.Humanoid.WalkSpeed = 0
-          v.HumanoidRootPart.CanCollide = false
-          FarmPos = v.HumanoidRootPart.CFrame
-          MonFarm = v.Name
-          --Click
-          until not _G.AutoMaterial or not v.Parent or v.Humanoid.Health <= 0
-          bringmob = false
-        end
-          end
-          end
-          else
-            for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].EnemySpawns:GetChildren()) do
-          if string.find(v.Name, Mon) then
-          if (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).Magnitude >= 10 then
-          Tween(v.CFrame * CFrame.new(posX,posY,posZ))
-          end
-          end
-          end
-          end
-          end)
-        end
-        end
-      end)
-
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
 local Window = OrionLib:MakeWindow({Name = "AngkorWat HUB || BloxFruits", HidePremium = false, IntroEnabled = true, IntroText = "Made By : ម៉ានុត", SaveConfig = true, ConfigFolder = "OrionTest"})
 local Tab = Window:MakeTab({
@@ -930,7 +887,8 @@ Tab5:AddToggle({
 		_G.BringMonster = Value
 	end    
 })
-Tab5:AddSlider({
+Tab4:AddLabel("Farm Stuff")
+Tab4:AddSlider({
 	Name = "Bring Mob Distance",
 	Min = 200,
 	Max = 500,
