@@ -685,11 +685,7 @@ function GetEquippedTool()
     end
     return nil
 end
-
----misc things---
-
-
-spawn(function()
+     spawn(function()
 	while task.wait() do
 		pcall(function()
             CheckQuest()
