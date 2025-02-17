@@ -602,34 +602,48 @@ function CheckQuest()
             NameMon = "Snow Demon"
             CFrameQuest = CFrame.new(-1150.0400390625, 20.378934860229492, -14446.3349609375)
             CFrameMon = CFrame.new(-880.2006225585938, 71.24776458740234, -14538.609375)
-            elseif MyLevel == 2450 or MyLevel <= 2474 then
-                Mon = "Isle Outlaw"
-                LevelQuest = 1
-                NameQuest = "TikiQuest1"
-                NameMon = "Isle Outlaw"
-                CFrameQuest = CFrame.new(-16547.748046875, 61.13533401489258, -173.41360473632812)
-                CFrameMon = CFrame.new(-16442.814453125, 116.13899993896484, -264.4637756347656)
-            elseif MyLevel == 2475 or MyLevel <= 2499 then
-                Mon = "Island Boy"
-                LevelQuest = 2
-                NameQuest = "TikiQuest1"
-                NameMon = "Island Boy"
-                CFrameQuest = CFrame.new(-16547.748046875, 61.13533401489258, -173.41360473632812)
-                CFrameMon = CFrame.new(-16901.26171875, 84.06756591796875, -192.88906860351562)
-            elseif MyLevel == 2500 or MyLevel <= 2524 then
-                Mon = "Sun-kissed Warrior"
-                LevelQuest = 1
-                NameQuest = "TikiQuest2"
-                NameMon = "kissed"
-                CFrameQuest = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
-                CFrameMon = CFrame.new(-16349.8779296875, 92.0808334350586, 1123.4169921875)
-            elseif MyLevel == 2525 or MyLevel <= 2550 then
-                Mon = "Isle Champion"
-                LevelQuest = 2
-                NameQuest = "TikiQuest2"
-                NameMon = "Isle Champion"
-                CFrameQuest = CFrame.new(-16539.078125, 55.68632888793945, 1051.5738525390625)
-                CFrameMon = CFrame.new(-16347.4150390625, 92.09503936767578, 1122.335205078125)
+        elseif ((v197 == 2450) or (v197 <= 2474) or (SelectMonster == "Isle Outlaw")) then
+            Ms = "Isle Outlaw";
+            NameQuest = "TikiQuest1";
+            QuestLv = 1;
+            NameMon = "Isle Outlaw";
+            CFrameQ = CFrame.new(- 16549.890625, 55.68635559082031, - 179.91360473632812);
+            CFrameMon = CFrame.new(- 16162.8193359375, 11.6863374710083, - 96.45481872558594);
+        elseif ((v197 == 2475) or (v197 <= 2499) or (SelectMonster == "Island Boy")) then
+            Ms = "Island Boy";
+            NameQuest = "TikiQuest1";
+            QuestLv = 2;
+            NameMon = "Island Boy";
+            CFrameQ = CFrame.new(- 16549.890625, 55.68635559082031, - 179.91360473632812);
+            CFrameMon = CFrame.new(- 16357.3125, 20.632822036743164, 1005.64892578125);
+        elseif ((v197 == 2500) or (v197 <= 2524) or (SelectMonster == "Sun-kissed Warrior")) then
+            Ms = "Sun-kissed Warrior";
+            NameQuest = "TikiQuest2";
+            QuestLv = 1;
+            NameMon = "Sun-kissed Warrior";
+            CFrameQ = CFrame.new(- 16541.021484375, 54.77081298828125, 1051.461181640625);
+            CFrameMon = CFrame.new(- 16357.3125, 20.632822036743164, 1005.64892578125);
+        elseif ((v197 == 2525) or (v197 <= 2549) or (SelectMonster == "Isle Champion")) then
+            Ms = "Isle Champion";
+            NameQuest = "TikiQuest2";
+            QuestLv = 2;
+            NameMon = "Isle Champion";
+            CFrameQ = CFrame.new(- 16541.021484375, 54.77081298828125, 1051.461181640625);
+            CFrameMon = CFrame.new(- 16848.94140625, 21.68633460998535, 1041.4490966796875);
+        elseif ((v197 == 2550) or (v197 <= 2574) or (SelectMonster == "Serpent Hunter")) then
+            Ms = "Serpent Hunter";
+            NameQuest = "TikiQuest3";
+            QuestLv = 1;
+            NameMon = "Serpent Hunter";
+            CFrameQ = CFrame.new(- 16665.19140625, 104.59640502929688, 1579.6943359375);
+            CFrameMon = CFrame.new(- 16621.4140625, 121.40631103515625, 1290.6881103515625);
+        elseif ((v197 == 2575) or (v197 <= 2599) or (SelectMonster == "Skull Slayer") or (v197 == 2600)) then
+            Ms = "Skull Slayer";
+            NameQuest = "TikiQuest3";
+            QuestLv = 2;
+            NameMon = "Skull Slayer";
+            CFrameQ = CFrame.new(- 16665.19140625, 104.59640502929688, 1579.6943359375);
+            CFrameMon = CFrame.new(- 16811.5703125, 84.625244140625, 1542.235107421875);
         end
     end
 end
@@ -1225,68 +1239,47 @@ Tab4:AddToggle({
 
 -- Toggle for Auto Start Raid
 Tab3:AddToggle({
-    Name = "Auto get key rengoku",
+    Name = "Auto get rengoku",
     Default = false,
     Callback = function(Value)
-   _G.Auto_Nha_Dien = Value
+   _G.Auto_Regoku = Value
     StopTween(_G.Auto_Nha_Dien)
     end
 })
 
 spawn(function()
-    while wait() do
-        pcall(function()
-            if _G.Auto_Nha_Dien and AnDepZai2 then
-                if game:GetService("Workspace").Enemies:FindFirstChild("Core") then
-                    for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                        if v.Name == "Core" and v.Humanoid.Health > 0 then
-                            repeat task.wait()
-                                AutoHaki()         
-                                EquipWeapon(_G.SelectWeapon)           
-                                topos(CFrame.new(448.46756, 199.356781, -441.389252))
-                            until v.Humanoid.Health <= 0 or _G.Auto_Nha_Dien == false
+    pcall(function()
+        while wait() do
+            if _G.Auto_Regoku then
+                if (game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key")) then
+                    EquipTool("Hidden Key");
+                    Tween(CFrame.new(6571.1201171875, 299.23028564453, - 6967.841796875));
+                elseif (game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior")) then
+                    for v1466, v1467 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if (((v1467.Name == "Snow Lurker") or (v1467.Name == "Arctic Warrior")) and (v1467.Humanoid.Health > 0)) then
+                            repeat
+                                task.wait(_G.Fast_Delay);
+                                EquipTool(SelectWeapon);
+                                AutoHaki();
+                                v1467.HumanoidRootPart.CanCollide = false;
+                                v1467.HumanoidRootPart.Size = Vector3.new(50, 50, 50);
+                                FarmPos = v1467.HumanoidRootPart.CFrame;
+                                MonFarm = v1467.Name;
+                                Tween(v1467.HumanoidRootPart.CFrame * Pos);
+                                AttackNoCoolDown();
+                                bringmob = true;
+                            until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or (_G.Auto_Regoku == false) or not v1467.Parent or (v1467.Humanoid.Health <= 0)
+                            bringmob = false;
                         end
                     end
-                else             
-                    topos(CFrame.new(448.46756, 199.356781, -441.389252))
+                else
+                    bringmob = false;
+                    Tween(CFrame.new(5439.716796875, 84.420944213867, - 6715.1635742188));
                 end
             end
-        end)
-    end
-end)
- 
-local Ren = {
-    ["Snow Lurker"] = CFrame.new(5480.55762, 28.8536663, -6814.50293),
-    ["Arctic Warrior"] = CFrame.new(6118.56836, 28.3932438, -6259.84961)
-}
- 
-spawn(function()
-    spawn(function()
-        while wait(.1) do
-            if RenGuKu and _G.BringMonster and AnDepZai2 then
-                pcall(function()
-                    for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
-                        if v.Name == "Snow Lurker" or v.Name == "Arctic Warrior" then
-                            local targetCFrame = Ren[v.Name]
-                            if targetCFrame then
-                                v.HumanoidRootPart.CFrame = targetCFrame
-                            end
-                            v.Head.CanCollide = false
-                            v.Humanoid.Sit = false
-                            v.HumanoidRootPart.CanCollide = false
-                            v.Humanoid.JumpPower = 0
-                            v.Humanoid.WalkSpeed = 0
-                            if v.Humanoid:FindFirstChild('Animator') then
-                                v.Humanoid:FindFirstChild('Animator'):Destroy()
-                            end
-                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                        end
-                    end
-                end)
-            end
         end
-    end)
-end)
+    end);
+end);
 
 -- Toggle for Auto Start Raid
 Tab3:AddToggle({
