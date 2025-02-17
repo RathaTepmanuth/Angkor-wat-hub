@@ -831,7 +831,7 @@ Tab3:AddToggle({
     end
 })
 -- Toggle for Auto Awaken
-Tab4:AddToggle({
+Tab3:AddToggle({
     Name = "aura kill law",
     Default = True,
     Callback = function(Value)
@@ -851,8 +851,8 @@ Tab3:AddToggle({
 	end    
 })
 -- Toggle for Auto Awaken
-Tab4:AddToggle({
-    Name = "aura kill law",
+Tab3:AddToggle({
+    Name = "rengoku",
     Default = True,
     Callback = function(Value)
     _G.Auto_Rengoku = value
