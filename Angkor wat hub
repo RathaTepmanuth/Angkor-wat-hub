@@ -813,16 +813,7 @@ Tab:AddDropdown({
 		SelectMaterial = Value
 	end    
 })
-Tab:AddToggle({
-	Name = "esp chest",
-	Default = false,
-	Callback = function(Value)
-    _G.ESPCHESTE = Value
-    ChestESP = Value
-    UpdateChestChams()
-		print(Value)
-	end    
-})
+
 Tab:AddToggle({
 	Name = "Auto Farm Materials",
 	Default = false,
