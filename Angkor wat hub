@@ -895,6 +895,27 @@ Tab5:AddToggle({
 	end    
 })
 Tab5:AddToggle({
+	Name = "walk on water",
+	Default = false,
+	Callback = function(Value)
+		_G.NuocLon = Value
+	end    
+})
+Tab5:AddToggle({
+	Name = "Fast Attack",
+	Default = false,
+	Callback = function(Value)
+		_G.Rejoin = Value
+	end    
+})
+Tab5:AddToggle({
+	Name = "Fast Attack",
+	Default = false,
+	Callback = function(Value)
+		_G.fastAttack = Value
+	end    
+})
+Tab5:AddToggle({
 	Name = "auto Haki",
 	Default = false,
 	Callback = function(Value)
@@ -1060,6 +1081,30 @@ spawn(function()
 		    EquipTool(_G.toolFarm)
         end
     end)
+end)
+
+spawn(function()
+      while task.wait() do
+		pcall(function()
+			if _G.NuocLon then
+		    	game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,112,1000)
+					else
+				game:GetService("Workspace").Map["WaterBase-Plane"].Size = Vector3.new(1000,80,1000)
+					end
+				end)
+			end
+		end)
+spawn(function()
+    while true do wait()
+        getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(Kick)
+            if not _G.TP_Ser and _G.Rejoin then
+                if Kick.Name == 'ErrorPrompt' and Kick:FindFirstChild('MessageArea') and Kick.MessageArea:FindFirstChild("ErrorFrame") then
+                    game:GetService("TeleportService"):Teleport(game.PlaceId)
+                    wait(50)
+                end
+            end
+        end)
+    end
 end)
 
 ---raid---
