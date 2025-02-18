@@ -948,7 +948,7 @@ defense = true
 	end    
 })
 Tab2:AddToggle({
-	Name = "auto defense",
+	Name = "auto gun",
 	Default = false,
 	Callback = function(Value)
 	_G.PointStats = 1  -- Number of points to add
