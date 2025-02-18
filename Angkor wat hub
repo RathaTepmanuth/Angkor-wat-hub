@@ -814,10 +814,12 @@ Tab:AddDropdown({
 	end    
 })
 Tab:AddToggle({
-	Name = "Auto chest tween",
+	Name = "esp chest",
 	Default = false,
 	Callback = function(Value)
-          getgenv().ChestFarm = true;
+    _G.ESPCHESTE = Value
+    ChestESP = Value
+    UpdateChestChams()
 		print(Value)
 	end    
 })
