@@ -902,17 +902,10 @@ Tab5:AddToggle({
 	end    
 })
 Tab5:AddToggle({
-	Name = "Fast Attack",
+	Name = "rejoion",
 	Default = false,
 	Callback = function(Value)
 		_G.Rejoin = Value
-	end    
-})
-Tab5:AddToggle({
-	Name = "Fast Attack",
-	Default = false,
-	Callback = function(Value)
-		_G.fastAttack = Value
 	end    
 })
 Tab5:AddToggle({
