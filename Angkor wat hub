@@ -777,6 +777,11 @@ local Tab4 = Window:MakeTab({
 	PremiumOnly = false
 })
 local Tab5 = Window:MakeTab({
+	Name = "Shop",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local Tab6 = Window:MakeTab({
 	Name = "Misc",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
@@ -832,6 +837,72 @@ Tab:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		AutoFarmChest = Value
+	end    
+})
+Tab5:AddLabel("fighting style")
+Tab5:AddDropdown({
+	Name = "Select melee",
+	Default = "Melee",
+	Options = {"Black Leg", "Electro", "Fishman Karate", "Dragon Claw", "Super Human", "Death Step", "Sharkman Karate", "Electric Claw", "Dragon Talon", "God Human","Sanguine Art"},
+	Callback = function(Value)
+    _G.Select_Melee = Value
+    if Value == "Black Leg" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyBlackLeg")
+    elseif Value == "Electro" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectro")
+    elseif Value == "Fishman Karate" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyFishmanKarate")
+    elseif Value == "Dragon Claw" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward", "DragonClaw", "1")
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward", "DragonClaw", "2")
+    elseif Value == "Super Human" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySuperhuman")
+    elseif Value == "Death Step" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDeathStep")
+    elseif Value == "Sharkman Karate" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate", true)
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuySharkmanKarate")
+    elseif Value == "Electric Claw" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyElectricClaw")
+    elseif Value == "Dragon Talon" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyDragonTalon")
+    elseif Value == "God Human" then
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman")
+    elseif Value == "Sanguine Art" then
+    local args = {
+        [1] = "BuySanguineArt"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end
+	end    
+})
+Tab5:AddToggle({
+	Name = "buy ghoul",
+	Default = false,
+	Callback = function(Value)
+local a = {
+            [1] = "Ectoplasm",
+            [2] = "BuyCheck",
+            [3] = 4
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+        local a = {
+            [1] = "Ectoplasm",
+            [2] = "Change",
+            [3] = 4
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
+	end    
+})
+Tab5:AddToggle({
+	Name = "buy cyborg",
+	Default = false,
+	Callback = function(Value)
+local a = {
+            [1] = "CyborgTrainer",
+            [2] = "Buy"
+        }
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(a))
 	end    
 })
 Tab3:AddLabel("Item koko")
@@ -892,52 +963,59 @@ Tab3:AddToggle({
 		_G.Auto_Regoku = Value
 	end    
 })
+Tab3:AddToggle({
+	Name = "auto ectoplasm",
+	Default = false,
+	Callback = function(Value)
+		Auto_Ki_Di = Value
+	end    
+})
 -- Misc Tab Stuff
-Tab5:AddLabel("Farm Stuff")
-Tab5:AddToggle({
+Tab6:AddLabel("Farm Stuff")
+Tab6:AddToggle({
 	Name = "Fast Attack",
 	Default = false,
 	Callback = function(Value)
 		_G.fastAttack = Value
 	end    
 })
-Tab5:AddToggle({
+Tab6:AddToggle({
 	Name = "no clip",
 	Default = false,
 	Callback = function(Value)
 		getgenv().NoClip = clipf
 	end    
 })
-Tab5:AddToggle({
+Tab6:AddToggle({
 	Name = "walk on water",
 	Default = false,
 	Callback = function(Value)
 		_G.NuocLon = Value
 	end    
 })
-Tab5:AddToggle({
+Tab6:AddToggle({
 	Name = "rejoion",
 	Default = false,
 	Callback = function(Value)
 		_G.Rejoin = Value
 	end    
 })
-Tab5:AddToggle({
+Tab6:AddToggle({
 	Name = "auto Haki",
 	Default = false,
 	Callback = function(Value)
 		_G.autoHaki = Value
 	end    
 })
-Tab5:AddToggle({
+Tab6:AddToggle({
 	Name = "bring Mobs",
 	Default = false,
 	Callback = function(Value)
 		BringMobs = Value
 	end    
 })
-Tab5:AddLabel("Farm Stuff")
-Tab5:AddSlider({
+Tab6:AddLabel("Farm Stuff")
+Tab6:AddSlider({
 	Name = "Bring Mob Distance",
 	Min = 200,
 	Max = 250,
@@ -1549,3 +1627,34 @@ spawn(function()
         end
     end
 end)
+
+    spawn(function()
+        while wait() do
+            if Auto_Ki_Di and AnDepZai2 then
+                pcall(function()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Ship Officer" or v.Name == "Ship Steward" or "Ship Engineer" or "Ship Deckhand" then
+                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                                    repeat wait()
+                                        AutoHaki()
+                                        EquipWeapon(_G.SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Humanoid.WalkSpeed = 0
+                                        topos(v.HumanoidRootPart.CFrame * Pos)
+                                        StartEctoplasmMagnet = true
+                                        EctoplasmMon = v.HumanoidRootPart.CFrame
+                                        topos(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                                    until not Auto_Ki_Di or not v.Parent or v.Humanoid.Health <= 0
+                                    StartEctoplasmMagnet = false
+                                end
+                            end
+                        end
+                    else
+                        StartEctoplasmMagnet = false
+                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
+                    end
+                end)
+            end
+        end
+    end)
