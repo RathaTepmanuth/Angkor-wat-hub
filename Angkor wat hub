@@ -878,6 +878,13 @@ Tab4:AddToggle({
 		getgenv().AutoStoreFruits = true
 	end    
 })
+Tab4:AddToggle({
+	Name = "auto teleport fruit",
+	Default = false,
+	Callback = function(Value)
+        _G.Tweenfruit = Value
+	end    
+})
 Tab3:AddToggle({
 	Name = "auto rengoku",
 	Default = false,
@@ -1508,7 +1515,6 @@ spawn(function()
     end
 end)
 
-_G.MagnitudeAdd = 0
 spawn(function()
 	while wait() do 
 		if AutoFarmChest then
@@ -1530,4 +1536,16 @@ spawn(function()
 			end
 		end
 	end
+end)
+
+spawn(function()
+    while wait(.1) do
+        if _G.Tweenfruit then
+            for i,v in pairs(game.Workspace:GetChildren()) do
+                if string.find(v.Name, "Fruit") then
+                    topos(v.Handle.CFrame)
+                end
+            end
+        end
+    end
 end)
