@@ -957,13 +957,6 @@ Tab4:AddToggle({
 	end    
 })
 Tab3:AddToggle({
-	Name = "auto rengoku",
-	Default = false,
-	Callback = function(Value)
-		_G.AutoRengoku = v
-	end    
-})
-Tab3:AddToggle({
 	Name = "auto ectoplasm",
 	Default = false,
 	Callback = function(Value)
@@ -975,6 +968,7 @@ Tab3:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		_G.Auto_Swan_Glasses_Hop = v
+        end
 })
 -- Misc Tab Stuff
 Tab6:AddLabel("Farm Stuff")
@@ -1666,7 +1660,8 @@ end)
             end
         end)
     end)
-    spawn(function()
+
+spawn(function()
         pcall(function()
             while wait() do
                 if _G.AutoFarmSwanGlasses then
