@@ -970,13 +970,6 @@ Tab3:AddToggle({
 		_G.Auto_Swan_Glasses_Hop = v
         end
 })
-Tab3:AddToggle({
-	Name = "auto rengoku",
-	Default = false,
-	Callback = function(Value)
-		getgenv().AutoRengoku = Value
-	end    
-})
 -- Misc Tab Stuff
 Tab6:AddLabel("Farm Stuff")
 Tab6:AddToggle({
@@ -1634,40 +1627,6 @@ spawn(function()
         end
     end
 end)
-
-local function AutoRengoku()
-  while getgenv().AutoRengoku do task.wait()
-    if VerifyNPC("Darkbeard") and getgenv().AutoDarkbeard then
-    else
-      if VerifyTool("Hidden Key") then
-        EquipToolName("Hidden Key")PlayerTP(CFrame.new(6571, 299, -6968))
-      elseif VerifyTool("Library Key") then
-        EquipToolName("Library Key")PlayerTP(CFrame.new(6373, 293, -6839))
-      elseif VerifyNPC("Awakened Ice Admiral") then
-        local AwakenedIceAdmiral = GetEnemies({"Awakened Ice Admiral"})
- 
-        if AwakenedIceAdmiral and AwakenedIceAdmiral:FindFirstChild("HumanoidRootPart") then
-          PlayerTP(AwakenedIceAdmiral.HumanoidRootPart.CFrame + getgenv().FarmPos)
-          pcall(function()PlayerClick()ActiveHaki()EquipTool()end)
-        end
-      else
-        local Enemie = GetEnemies({"Arctic Warrior", "Snow Lurker"})
- 
-        if not getgenv().AutoFarm_Level and not getgenv().AutoFarmBone then
-          if Enemie and Enemie:FindFirstChild("HumanoidRootPart") then
-            PlayerTP(Enemie.HumanoidRootPart.CFrame + getgenv().FarmPos)
-            pcall(function()PlayerClick()ActiveHaki()EquipTool()BringNPC(Enemie, true)end)
-          else
-            PlayerTP(CFrame.new(5707, 28, -6402))
-          end
-        end
-      end
-      local EnemieBossW = Enemies:FindFirstChild("Awakened Ice Admiral")
-      local EnemieBossR = ReplicatedStorage:FindFirstChild("Awakened Ice Admiral")
-      local Enemie = GetProxyNPC()
-    end
-  end
-end
 
 spawn(function()
         pcall(function()
