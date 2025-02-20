@@ -970,6 +970,13 @@ Tab3:AddToggle({
 		_G.Auto_Swan_Glasses_Hop = v
         end
 })
+Tab3:AddToggle({
+	Name = "auto rengoku",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoRengoku = v
+	end    
+})
 -- Misc Tab Stuff
 Tab6:AddLabel("Farm Stuff")
 Tab6:AddToggle({
