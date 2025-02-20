@@ -975,7 +975,6 @@ Tab3:AddToggle({
 	Default = false,
 	Callback = function(Value)
 		getgenv().AutoRengoku = Value
-                AutoRengoku()
 	end    
 })
 -- Misc Tab Stuff
