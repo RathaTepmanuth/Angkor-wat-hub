@@ -960,7 +960,7 @@ Tab3:AddToggle({
 	Name = "auto rengoku",
 	Default = false,
 	Callback = function(Value)
-		_G.Auto_Regoku = Value
+		_G.AutoRengoku = v
 	end    
 })
 Tab3:AddToggle({
@@ -969,6 +969,12 @@ Tab3:AddToggle({
 	Callback = function(Value)
 		Auto_Ki_Di = Value
 	end    
+})
+Tab3:AddToggle({
+	Name = "auto swan sunglasses",
+	Default = false,
+	Callback = function(Value)
+		_G.Auto_Swan_Glasses_Hop = v
 })
 -- Misc Tab Stuff
 Tab6:AddLabel("Farm Stuff")
@@ -1629,32 +1635,66 @@ spawn(function()
 end)
 
     spawn(function()
-        while wait() do
-            if Auto_Ki_Di and AnDepZai2 then
-                pcall(function()
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Ship Deckhand") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Engineer") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Steward") or game:GetService("Workspace").Enemies:FindFirstChild("Ship Officer") then
+        pcall(function()
+            while wait() do
+                if _G.AutoRengoku then
+                    if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key") then
+                        EquipWeapon("Hidden Key")
+                        Tween(CFrame.new(6571.1201171875, 299.23028564453, -6967.841796875))
+                    elseif game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker [Lv. 1375]") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior [Lv. 1350]") then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == "Ship Officer" or v.Name == "Ship Steward" or "Ship Engineer" or "Ship Deckhand" then
-                                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                    repeat wait()
-                                        AutoHaki()
-                                        EquipWeapon(_G.SelectWeapon)
-                                        v.HumanoidRootPart.CanCollide = false
-                                        v.Humanoid.WalkSpeed = 0
-                                        topos(v.HumanoidRootPart.CFrame * Pos)
-                                        StartEctoplasmMagnet = true
-                                        EctoplasmMon = v.HumanoidRootPart.CFrame
-                                        topos(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
-                                    until not Auto_Ki_Di or not v.Parent or v.Humanoid.Health <= 0
-                                    StartEctoplasmMagnet = false
-                                end
+                            if (v.Name == "Snow Lurker [Lv. 1375]" or v.Name == "Arctic Warrior [Lv. 1350]") and v.Humanoid.Health > 0 then
+                                repeat task.wait()
+                                    EquipWeapon(_G.SelectWeapon)
+                                    AutoHaki()
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    RengokuMon = v.HumanoidRootPart.CFrame
+                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                                    game:GetService'VirtualUser':CaptureController()
+                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    StartRengokuMagnet = true
+                                until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or _G.AutoRengoku == false or not v.Parent or v.Humanoid.Health <= 0
+                                StartRengokuMagnet = false
                             end
                         end
                     else
-                        StartEctoplasmMagnet = false
-                        topos(CFrame.new(911.35827636719, 125.95812988281, 33159.5390625))
+                        StartRengokuMagnet = false
+                        Tween(CFrame.new(5439.716796875, 84.420944213867, -6715.1635742188))
                     end
-                end)
+                end
             end
-        end
+        end)
+    end)
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.AutoFarmSwanGlasses then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Don Swan [Lv. 1000] [Boss]") then
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            if v.Name == "Don Swan [Lv. 1000] [Boss]" and v.Humanoid.Health > 0 and v:IsA("Model") and v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") then
+                                repeat task.wait()
+                                    pcall(function()
+                                        AutoHaki()
+                                        EquipWeapon(_G.SelectWeapon)
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        Tween(v.HumanoidRootPart.CFrame * CFrame.new(2,40,2))
+                                        game:GetService("VirtualUser"):CaptureController()
+                                        game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 670))
+                                        sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                                    end)
+                                until _G.AutoFarmSwanGlasses == false or v.Humanoid.Health <= 0
+                            end
+                        end
+                    else 
+                        repeat task.wait()
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(2284.912109375, 15.537666320801, 905.48291015625)) 
+                        until (CFrame.new(2284.912109375, 15.537666320801, 905.48291015625).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 or _G.AutoFarmSwanGlasses == false
+                    end
+                elseif _G.AutoFarmSwanGlasses then
+                    Hop()
+                end
+            end
+        end)
     end)
