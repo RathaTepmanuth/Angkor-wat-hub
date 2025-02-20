@@ -974,7 +974,8 @@ Tab3:AddToggle({
 	Name = "auto rengoku",
 	Default = false,
 	Callback = function(Value)
-		_G.AutoRengoku = v
+		getgenv().AutoRengoku = Value
+                AutoRengoku()
 	end    
 })
 -- Misc Tab Stuff
@@ -1635,38 +1636,39 @@ spawn(function()
     end
 end)
 
-    spawn(function()
-        pcall(function()
-            while wait() do
-                if _G.AutoRengoku then
-                    if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key") then
-                        EquipWeapon("Hidden Key")
-                        Tween(CFrame.new(6571.1201171875, 299.23028564453, -6967.841796875))
-                    elseif game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker [Lv. 1375]") or game:GetService("Workspace").Enemies:FindFirstChild("Arctic Warrior [Lv. 1350]") then
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if (v.Name == "Snow Lurker [Lv. 1375]" or v.Name == "Arctic Warrior [Lv. 1350]") and v.Humanoid.Health > 0 then
-                                repeat task.wait()
-                                    EquipWeapon(_G.SelectWeapon)
-                                    AutoHaki()
-                                    v.HumanoidRootPart.CanCollide = false
-                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                    RengokuMon = v.HumanoidRootPart.CFrame
-                                    Tween(v.HumanoidRootPart.CFrame * CFrame.new(2,20,2))
-                                    game:GetService'VirtualUser':CaptureController()
-                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                    StartRengokuMagnet = true
-                                until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or _G.AutoRengoku == false or not v.Parent or v.Humanoid.Health <= 0
-                                StartRengokuMagnet = false
-                            end
-                        end
-                    else
-                        StartRengokuMagnet = false
-                        Tween(CFrame.new(5439.716796875, 84.420944213867, -6715.1635742188))
-                    end
-                end
-            end
-        end)
-    end)
+local function AutoRengoku()
+  while getgenv().AutoRengoku do task.wait()
+    if VerifyNPC("Darkbeard") and getgenv().AutoDarkbeard then
+    else
+      if VerifyTool("Hidden Key") then
+        EquipToolName("Hidden Key")PlayerTP(CFrame.new(6571, 299, -6968))
+      elseif VerifyTool("Library Key") then
+        EquipToolName("Library Key")PlayerTP(CFrame.new(6373, 293, -6839))
+      elseif VerifyNPC("Awakened Ice Admiral") then
+        local AwakenedIceAdmiral = GetEnemies({"Awakened Ice Admiral"})
+ 
+        if AwakenedIceAdmiral and AwakenedIceAdmiral:FindFirstChild("HumanoidRootPart") then
+          PlayerTP(AwakenedIceAdmiral.HumanoidRootPart.CFrame + getgenv().FarmPos)
+          pcall(function()PlayerClick()ActiveHaki()EquipTool()end)
+        end
+      else
+        local Enemie = GetEnemies({"Arctic Warrior", "Snow Lurker"})
+ 
+        if not getgenv().AutoFarm_Level and not getgenv().AutoFarmBone then
+          if Enemie and Enemie:FindFirstChild("HumanoidRootPart") then
+            PlayerTP(Enemie.HumanoidRootPart.CFrame + getgenv().FarmPos)
+            pcall(function()PlayerClick()ActiveHaki()EquipTool()BringNPC(Enemie, true)end)
+          else
+            PlayerTP(CFrame.new(5707, 28, -6402))
+          end
+        end
+      end
+      local EnemieBossW = Enemies:FindFirstChild("Awakened Ice Admiral")
+      local EnemieBossR = ReplicatedStorage:FindFirstChild("Awakened Ice Admiral")
+      local Enemie = GetProxyNPC()
+    end
+  end
+end
 
 spawn(function()
         pcall(function()
