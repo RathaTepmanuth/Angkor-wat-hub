@@ -1011,23 +1011,18 @@ Tab6:AddToggle({
 	Name = "bring Mobs",
 	Default = false,
 	Callback = function(Value)
-		BringMobs = Value
-	end    
-})
-Tab6:AddLabel("Farm Stuff")
-Tab6:AddSlider({
-	Name = "Bring Mob Distance",
-	Min = 200,
-	Max = 250,
-	Default = 250,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "Value",
-	Callback = function(Value)
-		bringfrec = Value
+		_G.BringMonster = Value
 	end    
 })
 
+Tab:AddDropdown({
+	Name = "Select bring mob",
+	Default = "Bring",
+	Options = {"Low", "Normal", "Super Bring"},
+	Callback = function(Value)
+		_G.BringMode = Value
+	end    
+})
 ---stat---
 
 Tab2:AddToggle({
@@ -1143,18 +1138,20 @@ spawn(function()
 	 end
  end)
  spawn(function()
-	while task.wait() do
-		if _G.autoFarmNearest then
-		    for _, v in pairs(workspace.Enemies:GetChildren()) do
-		        TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
-		        v.HumanoidRootPart.Size = Vector3.new(60, 60, 60)
-		        if _G.BringMobs then
-		            bringMobs(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -20, 0))
-		        end
-		    end
-		end
-	end
- end)
+  while wait(.1) do
+  if _G.BringMode then
+  pcall(function()
+    if _G.BringMode == "Low" then
+    _G.BringMode = 300
+    elseif _G.BringMode == "Normal" then
+    _G.BringMode = 375
+    elseif _G.BringMode == "Super Bring" then
+    _G.BringMode = 450
+    end
+    end)
+  end
+  end
+  end)
  spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		if _G.autoFarm or _G.autoFarmNearest then
