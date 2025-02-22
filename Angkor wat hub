@@ -927,6 +927,13 @@ Tab3:AddToggle({
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 	end    
 })
+Tab3:AddToggle({
+    Name = "auto rengoku",
+    Default = True,
+    Callback = function(L_382_arg0)
+     _Phantom.AutoRengoku = L_382_arg0;
+    end
+})
 Tab4:AddLabel("fruit")
 Tab4:AddToggle({
 	Name = "auto random fruit",
@@ -1627,3 +1634,35 @@ spawn(function()
             end
         end)
     end)
+
+	spawn(function()
+		pcall(function()
+			while wait() do
+				if _Phantom.AutoRengoku then
+					if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Hidden Key") then
+						EquipWeapon("Hidden Key")
+						TP(CFrame.new(6571.1201171875, 299.23028564453, - 6967.841796875))
+					elseif game:GetService("Workspace").Enemies:FindFirstChild("Snow Lurker") or game:GetService("Workspace").Enemies:FindFirstChild("Beautiful Pirate") then
+						for L_372_forvar0, L_373_forvar1 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+							if (L_373_forvar1.Name == "Snow Lurker" or L_373_forvar1.Name == "Arctic Warrior") and L_373_forvar1.Humanoid.Health > 0 then
+								repeat
+									wait()
+									EquipWeapon(_Phantom.SelectWeapon)
+									L_373_forvar1.HumanoidRootPart.CanCollide = false;
+									L_373_forvar1.HumanoidRootPart.Size = Vector3.new(50, 50, 50)
+									FarmPos = L_373_forvar1.HumanoidRootPart.CFrame;
+									MonFarm = L_373_forvar1.Name;
+									StartMagnet = true;
+									TP(L_373_forvar1.HumanoidRootPart.CFrame * MethodFarm)
+								until game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Hidden Key") or _Phantom.AutoRengoku == false or not L_373_forvar1.Parent or L_373_forvar1.Humanoid.Health <= 0;
+								StartMagnet = false
+							end
+						end
+					else
+						StartMagnet = false;
+						TP(CFrame.new(5439.716796875, 84.420944213867, - 6715.1635742188))
+					end
+				end
+			end
+		end)
+	end)
