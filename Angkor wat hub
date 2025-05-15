@@ -784,3 +784,108 @@ spawn(function()
                 end
              end
           end)
+-- Misc Tab Stuff
+Tab4:AddLabel("Farm Stuff")
+Tab4:AddSlider({
+	Name = "Bring Mob Distance",
+	Min = 200,
+	Max = 500,
+	Default = 250,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Value",
+	Callback = function(Value)
+		_G.bringDistance = Value
+	end    
+})
+Tab4:AddToggle({
+	Name = "Fast Attack",
+	Default = false,
+	Callback = function(Value)
+		_G.fastAttack = Value
+	end    
+})
+Tab4:AddToggle({
+	Name = "auto Haki",
+	Default = false,
+	Callback = function(Value)
+		_G.autoHaki = Value
+	end    
+})
+Tab4:AddToggle({
+	Name = "bring Mobs (Work with Auto Farms)",
+	Default = false,
+	Callback = function(Value)
+		_G.BringMonster = Value
+	end    
+})
+
+spawn(function()
+while task.wait() do
+if _G.SettingToggle["Tool Attack"] == "Melee" then
+   for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+      if v.ToolTip == "Melee" then
+          if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+             _G.ToolAttack = v.Name
+          end
+      end
+  end
+elseif _G.SettingToggle["Tool Attack"] == "Sword" then
+for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+   if v.ToolTip == "Sword" then
+       if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+          _G.ToolAttack = v.Name
+        end
+    end
+end
+elseif _G.SettingToggle["Tool Attack"] == "Blox Fruit" then
+for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+   if v.ToolTip == "Blox Fruit" then
+       if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+          _G.ToolAttack = v.Name
+       end
+   end
+end
+end
+end
+end)
+local plr = game.Players.LocalPlayer 
+local char = plr.Character or plr.CharacterAdded:Wait()
+spawn(function()
+    while task.wait() do
+        if _G.autoFarm then
+            CheckQuest()
+            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                TP1(CFrameQuest)
+                if (CFrameQuest.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5 then
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StartQuest",NameQuest,LevelQuest)
+                end
+            elseif game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
+                for _, v in pairs(workspace.Enemies:GetChildren()) do
+                    if v.Name == NameMon then
+                        if v.Humanoid.Health > 0 then
+                            TP2(v.HumanoidRootPart.CFrame * CFrame.new(0, 20, 0))
+                            if _G.BringMonster then
+                                bringMobs(char.HumanoidRootPart.CFrame * CFrame.new(0, -20, 0), NameMon)
+                            end
+                            if not _G.fastAttack then
+                                EquipTool(_G.ToolAttack)
+                                AttackNoCoolDown()
+                            else
+                                EquipTool(_G.ToolAttack)
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
+
+while task.wait() do
+    if _G.fastAttack then
+        AttackNoCoolDown()
+    elseif _G.autoHaki then
+        autoHaki()
+    end
+end
