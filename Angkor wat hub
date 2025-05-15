@@ -22,8 +22,6 @@ local function StopTween()
     end
     _G.StopTween = false
 end
-
-MatsuneA1["4"].MouseButton1Click:Connect(function()
     StopTween()
 end)
 
@@ -3028,8 +3026,13 @@ function CheckItemBPCRBPCR(name)
 end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Angkor wat [beta]", HidePremium = false, IntroEnabled = true, IntroText = "Made By : TojiButSans", SaveConfig = true, ConfigFolder = "OrionTest"})
-local Tab = Window:MakeTab({
+local Window = OrionLib:MakeWindow({
+    Name = "Angkor wat Hub",
+    HidePremium = false,
+    SaveConfig = true,
+    ConfigFolder = "Angkor wat hub"
+})
+local Tab2 = Window:MakeTab({
 	Name = "Main",
 	Icon = "rbxassetid://7734053426",
 	PremiumOnly = false
