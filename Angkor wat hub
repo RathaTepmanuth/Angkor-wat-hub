@@ -1,29 +1,26 @@
-local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "FEAR HUB || BloxFruits", HidePremium = false, IntroEnabled = true, IntroText = "Made By : TojiButSans", SaveConfig = true, ConfigFolder = "OrionTest"})
 
-local Window = Fluent:CreateWindow({
-    Title = "angkorwat Hub | Free Scripts",
-    SubTitle = "",
-    TabWidth = 160,
-    Size = UDim2.fromOffset(600, 325),
-    Acrylic = false,
-    Theme = "Dark",
-    MinimizeKey = Enum.KeyCode.End
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://7734053426",
+	PremiumOnly = false
 })
-
-local Tabs = {
-    infor = Window:AddTab({ Title = "Infor Hub", Icon = "" }),
-    Home = Window:AddTab({ Title = "Status", Icon = "" }),
-    Main = Window:AddTab({ Title = "Gerenal", Icon = "" }),
-    item = Window:AddTab({ Title = "Item Farm", Icon = "" }),
-    C = Window:AddTab({ Title = "Combat", Icon = "" }),
-    tele = Window:AddTab({ Title = "Tween Island", Icon = "" }),
-    an = Window:AddTab({ Title = "Misc Sever", Icon = "" }),
-    Race = Window:AddTab({ Title = "Mirage + Race V4", Icon = "" }),
-    Raid = Window:AddTab({ Title = "Raid-Fruit", Icon = "" }),
-    Melee = Window:AddTab({ Title = "Shop", Icon = "" })
-}
-
-local Options = Fluent.Options
+local Tab2 = Window:MakeTab({
+	Name = "Quests/Items",
+	Icon = "rbxassetid://10734975692",
+	PremiumOnly = false
+})
+local Tab3 = Window:MakeTab({
+	Name = "Fruits/Raid",
+	Icon = "rbxassetid://10709790875",
+	PremiumOnly = false
+})
+local Tab4 = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4370318685",
+	PremiumOnly = false
+})
 
 --//ScreenGui
 local ScreenGui = Instance.new("ScreenGui")
@@ -1287,15 +1284,6 @@ function GetDistance(q)
         return (q - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     end
 end
-
----------------SettingTab
-Tabs.infor:AddButton({
-        Title = "Discord | AnDepZai Hub",
-        Description = "Copy Link Discord",
-        Callback = function()
-        setclipboard("https://discord.com/invite/EV7vagx6CT")
-        end
-    })
 ---------------TabStatus
 local BuonNaoDauAiThau = Tabs.Home:AddParagraph({
     Title = "Katakuri Status:",
